@@ -1,2 +1,2 @@
-let nombre = prompt("ingresa nombre");
-let resultado = (nombre)
+let nombres = prompt("ingresa nombre");
+let resultado = (nombres)
