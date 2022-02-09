@@ -6,7 +6,7 @@ while (nombre != "esc"){
         break;
         case "lucero": alert("Hola soy "+nombre);
         break;
-        default: alert("quieres eres perro");
+        default: alert("quien res eres perro")
         break;
     }
     nombre = prompt("ingresa otro nombre");
