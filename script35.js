@@ -1,5 +1,5 @@
-let ventaNombre = prompt("Nombre de Producto");
-let ventaTipo = prompt("Ingresa tipo");
+let ventaNombre = prompt("Nombre de Producto","Ejem: Torta Helada");
+let ventaTipo = prompt("Ingresa tipo","Ejem: torta");
 let ventaPeso = prompt("Ingresa el peso");
 let ventaCantidad = prompt("¿Que cantidad?");
 let ventaPrecio = prompt("Ingresa precio");
@@ -60,11 +60,22 @@ function muestraventa(){
         console.log(ventaProducto[propiedad]);
     }
 }
+function muestraprecio(){
+    alert("El precio final del presupuesto es "+ventaProducto.precio);
+}
+function muestratabla(){
+    const objeto = [
+        {PRODUCTO: ventaProducto.nombre, TIPO: ventaProducto.tipo, PESO: ventaProducto.peso, CANTIDAD: ventaProducto.cantidad, PRECIO: ventaProducto.precio, ADICIONAL: ventaProducto.adicional, DELIVERY: ventaProducto.delivery},
+    ];
+    console.table(objeto);
+}
 
 muestraventa();
+muestraprecio();
+muestratabla();
 
-const objeto = [
-    {PRODUCTO: ventaProducto.nombre, TIPO: ventaProducto.tipo, PESO: ventaProducto.peso, CANTIDAD: ventaProducto.cantidad, PRECIO: ventaProducto.precio, ADICIONAL: ventaProducto.adicional, DELIVERY: ventaProducto.delivery},
-];
 
-console.table(objeto);
+
+
+
+
