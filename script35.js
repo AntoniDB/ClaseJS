@@ -7,7 +7,7 @@ let ventaAdicional = prompt("Desea adicional (si)(no)");
 let ventaDelivery = prompt("Desea delivery (si)(no)");
 let ventaDescuento = prompt("Aplicar descuento? (febrero) (julio) (navidad)")
 
-class producto{
+class Producto{
     constructor(nombre, tipo, peso, cantidad, precio){
         this.nombre = nombre.toUpperCase();
         this.tipo = tipo;
@@ -37,7 +37,7 @@ class producto{
     }
     
 }
-const ventaProducto = new producto(ventaNombre,ventaTipo,ventaPeso,ventaCantidad,ventaPrecio);
+const ventaProducto = new Producto(ventaNombre,ventaTipo,ventaPeso,ventaCantidad,ventaPrecio);
 
 if(ventaAdicional == "si"){
     ventaProducto.deseadicional();
