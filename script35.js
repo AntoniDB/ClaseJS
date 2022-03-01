@@ -3,9 +3,12 @@ let ventaTipo = prompt("Ingresa tipo","Ejem: torta");
 let ventaPeso = prompt("Ingresa el peso");
 let ventaCantidad = prompt("¿Que cantidad?");
 let ventaPrecio = prompt("Ingresa precio");
+let ventaDescuento = prompt("Aplicar descuento? (febrero) (julio) (navidad)");
 let ventaAdicional = prompt("Desea adicional (si)(no)");
 let ventaDelivery = prompt("Desea delivery (si)(no)");
-let ventaDescuento = prompt("Aplicar descuento? (febrero) (julio) (navidad)")
+
+
+
 
 class Producto{
     constructor(nombre, tipo, peso, cantidad, precio){
@@ -37,6 +40,7 @@ class Producto{
     }
     
 }
+
 const ventaProducto = new Producto(ventaNombre,ventaTipo,ventaPeso,ventaCantidad,ventaPrecio);
 
 if(ventaAdicional == "si"){
@@ -45,6 +49,8 @@ if(ventaAdicional == "si"){
 if(ventaDelivery == "si"){
     ventaProducto.deseadelivery();
 }
+
+
 switch(ventaDescuento){
     case "febrero" : ventaProducto.descuentoFebrero(); ventaProducto.porcantidad();
     break;
@@ -64,8 +70,8 @@ function muestraprecio(){
     alert("El precio final del presupuesto es "+ventaProducto.precio);
 }
 function muestratabla(){
-    const objeto = [
-        {PRODUCTO: ventaProducto.nombre, TIPO: ventaProducto.tipo, PESO: ventaProducto.peso, CANTIDAD: ventaProducto.cantidad, PRECIO: ventaProducto.precio, ADICIONAL: ventaProducto.adicional, DELIVERY: ventaProducto.delivery},
+  const objeto = [
+    {PRODUCTO: ventaProducto.nombre, TIPO: ventaProducto.tipo, PESO: ventaProducto.peso, CANTIDAD: ventaProducto.cantidad, PRECIO: ventaProducto.precio, ADICIONAL: ventaProducto.adicional, DELIVERY: ventaProducto.delivery},
     ];
     console.table(objeto);
 }
@@ -73,6 +79,8 @@ function muestratabla(){
 muestraventa();
 muestraprecio();
 muestratabla();
+
+
 
 
 

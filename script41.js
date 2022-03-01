@@ -1,4 +1,4 @@
-//funciona eliminar valor de array
+//funcion eliminar valor de array
 const nombres = ["pedro","ana","jose","rodolfo","auron","rubius","santiago","victor","verde","ash"];
 
 //funcion eliminar

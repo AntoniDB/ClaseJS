@@ -16,6 +16,7 @@ const arrayQ = [];
 arrayQ.push(new Producto("aceite","15"));
 arrayQ.push(new Producto("leche","48"));
 arrayQ.push(new Producto("harina","42"));
+arrayQ.push(new Producto("sal","14"));
 
 for(array of arrayQ){
     array.sumaIva();
