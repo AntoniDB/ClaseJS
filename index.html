@@ -36,10 +36,10 @@
             <div class="row gap-0 mt-3">
                 
                 <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
-                    <input class="form-control" type="text" placeholder="Nombre cotizacion" aria-label="default input example">
+                    <input class="form-control" id="nombrec" type="text" placeholder="Nombre cotizacion" aria-label="default input example" value="">
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" aria-label="Default select example" id="tipoc">
                         <option selected>Tipo</option>
                         <option value="1">Torta</option>
                         <option value="2">Personalizada</option>
@@ -51,15 +51,15 @@
                 </div>
                 
                 <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" aria-label="Default select example" id="pesoc">
                         <option selected>Peso</option>
-                        <option value="1">1/2</option>
-                        <option value="2">1</option>
-                        <option value="3">1 1/2</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
                     </select>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" aria-label="Default select example" id="cantidadc">
                         <option selected>Cantidad</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -71,25 +71,25 @@
                 <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
                     <div class="input-group">
                         <div class="input-group-text">S/.</div>
-                        <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Precio por tipo">
+                        <input type="text" class="form-control" id="precioc" placeholder="Precio por tipo">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" aria-label="Default select example" id="adicionalc">
                         <option selected>Adicional</option>
-                        <option value="1">Si</option>
-                        <option value="2">No</option>
+                        <option value="si">Si</option>
+                        <option value="no">No</option>
                     </select>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Delivery</option>
-                        <option value="1">Si</option>
-                        <option value="2">No</option>
+                    <select class="form-select" aria-label="Default select example" id="deliveryc">
+                        <option selected>Delivery - Aplica sobre precio real</option>
+                        <option value="si">Si</option>
+                        <option value="no">No</option>
                     </select>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" aria-label="Default select example" id="descuentoc">
                         <option selected>Descuento</option>
                         <option value="febrero">Febrero - San Valentin</option>
                         <option value="julio">Julio - Fiestas Patrias</option>
@@ -97,7 +97,8 @@
                     </select>
                 </div>
                 <div class="col-12 mt-2">
-                    <input type="button" class="btn btn-danger"value="calcular">
+                    <input type="button" class="btn btn-danger" value="Calcular" id="btncalcular">
+                    <input type="button" class="btn btn-success" value="Agregar" id="btnagregar">
                 </div>
             </div>
             </form>
@@ -105,33 +106,23 @@
         </div>
         <div class="container mt-3">
             <div class="container">
-                <table class="table table-striped">
+                <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Tipo</th>
-                        <th scope="col">Perso</th>
+                        <th scope="col">Peso</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col">Precio</th>
+                        <th scope="col">Descuento</th>  
                         <th scope="col">Adicional</th>
                         <th scope="col">Delivery</th>
-                        <th scope="col">Descuento</th>
+                        
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
+                    <tbody id="contenido">
+                      
+                      
                       
                     </tbody>
                   </table>
