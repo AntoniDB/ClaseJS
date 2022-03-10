@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #384f88;">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #54638a;">
         <div class="container-fluid">
           <a class="navbar-brand text-white" href="#"><strong>MDLP</strong></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,23 +29,25 @@
             <h2>Pastelería MDL<small class="text-muted">&nbsp;Simulador de Precios</small></h2>
         </div>    
         <div class="container mt-3">
-            <div class="container rounded-2 border border-light shadow p-2">
-                <h5">Selecciona las opciones</h5>
+            <div class="container rounded-2 border border-light shadow p-2" id="padrealert">
+                <div class="alert alert-danger" role="alert" id="alertelim">
+                    Selecciona las opciones para generar el presupuesto
+                  </div>
             </div>
             <form>
             <div class="row gap-0 mt-3">
                 
                 <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
-                    <input class="form-control" id="nombrec" type="text" placeholder="Nombre cotizacion" aria-label="default input example" value="">
+                    <input class="form-control" id="nombrec" type="text" placeholder="Nombre cotizacion" aria-label="default input example" value="" required>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
                     <select class="form-select" aria-label="Default select example" id="tipoc">
-                        <option selected>Tipo</option>
+                        <option selected value="0">Tipo</option>
                         <option value="1">Torta</option>
-                        <option value="2">Personalizada</option>
-                        <option value="3">Masa elástica</option>
-                        <option value="4">Torta frutas</option>
-                        <option value="5">Cup Cake</option>
+                        <option value="1">Personalizada</option>
+                        <option value="1">Masa elástica</option>
+                        <option value="1">Torta frutas</option>
+                        <option value="2">Cup Cake</option>
                         <option value="3">Catergin</option>
                     </select>
                 </div>
@@ -60,18 +62,15 @@
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
                     <select class="form-select" aria-label="Default select example" id="cantidadc">
-                        <option selected>Cantidad</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">Pack 3</option>
-                        <option value="4">Pack 6</option>
-                        <option value="5">Pack 12</option>
+                        
+
+
                     </select>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
                     <div class="input-group">
                         <div class="input-group-text">S/.</div>
-                        <input type="text" class="form-control" id="precioc" placeholder="Precio por tipo">
+                        <input type="text" class="form-control" id="precioc" placeholder="Precio por cantidad mínima" required>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
@@ -97,7 +96,8 @@
                     </select>
                 </div>
                 <div class="col-12 mt-2">
-                    <input type="button" class="btn btn-danger" value="Calcular" id="btncalcular">
+                    <input type="button" class="btn btn-warning" value="Nuevo" id="btnnuevo" onclick="location.reload()">
+                    <input type="button" class="btn btn-danger" value="Calcular" id="btncalcular" disabled>
                     <input type="button" class="btn btn-success" value="Agregar" id="btnagregar">
                 </div>
             </div>
@@ -105,7 +105,7 @@
             
         </div>
         <div class="container mt-3">
-            <div class="container">
+            <div class="container table-responsive">
                 <table class="table">
                     <thead>
                       <tr>
@@ -121,8 +121,7 @@
                       </tr>
                     </thead>
                     <tbody id="contenido">
-                      
-                      
+                          
                       
                     </tbody>
                   </table>

@@ -9,6 +9,55 @@ let ventaDelivery;
 let productoNombre;
 let productoPrecio;
 
+const cantia =[1,2,3,4,5,6];
+const cantib = [{id:1,name:"Pack de 3"},{id:2,name:"Pack de 6"},{id:3,name:"Pack de 12"}];
+const cantic = [{id:1,name:"Unidades x 15"},{id:2,name:"Unidades x 30"},{id:3,name:"Unidades x 50"},{id:4,name:"Unidades x 100"}];
+
+let tiposelect = document.getElementById("tipoc");
+let cantidadselect = document.getElementById("cantidadc");
+//función borrar options de select 
+tiposelect.onchange = () => {
+    for (let i = cantidadselect.options.length; i >= 0; i--) {
+      cantidadselect.remove(i);
+    }
+  };
+///select dependiente de otro select
+tiposelect.onclick = () => {        
+    let valuetipo = parseInt(tiposelect.value);
+    if(valuetipo != 0){
+        switch(valuetipo){
+            case 1:
+                for(const canta of cantia){
+                    let opt = document.createElement("option");
+                    opt.innerHTML = `${canta}`;
+                    opt.value = canta;
+                    cantidadselect.appendChild(opt);
+                }
+                console.log(cantidadselect.length);
+            break;
+            case 2:
+                for(const cantb of cantib){
+                    let opt = document.createElement("option");
+                    opt.innerHTML = `${cantb.name}`;
+                    opt.value = cantb.id;
+                    cantidadselect.appendChild(opt);
+                } 
+            break;
+            case 3:
+                for(const cantc of cantic){
+                    let opt = document.createElement("option");
+                    opt.innerHTML = `${cantc.name}`;
+                    opt.value = cantc.id;
+                    cantidadselect.appendChild(opt);
+                }
+            break;
+            default: console.log("Selecionar Tipo Producto")
+            break;
+        }
+    }
+}
+
+
 function llenap(){
     productoNombre = prompt("Nombre del nuevo producto");
     productoPrecio = prompt("Precio del nuevo producto");
@@ -101,7 +150,10 @@ function llena(){
     ventaDescuento = document.getElementById("descuentoc").value;
     ventaAdicional = document.getElementById("adicionalc").value;
     ventaDelivery = document.getElementById("deliveryc").value;
-
+    if(ventaNombre == ""){
+        alert("Deber rellenar los campos");
+        location.reload();
+    }
     ventaTemporal.push(new Venta(ventaNombre,ventaTipo,ventaPeso,ventaCantidad,ventaPrecio,ventaDescuento));
     for(const vta of ventaTemporal){
         if(ventaAdicional == "si"){
@@ -112,36 +164,36 @@ function llena(){
         }
     }
     console.table(ventaTemporal);
-
-    ventaProducto.push(new Venta(ventaNombre,ventaTipo,ventaPeso,ventaCantidad,ventaPrecio,ventaDescuento));
+    ///llenar array ventaProducto con item de arrayTemporal
+    ventaTemporal.map((item) => {
+    ventaProducto.push(item);
+    return item;
+    });
     
-    for(const vtp of ventaProducto){
-        if(ventaAdicional == "si"){
-            vtp.deseadicional();
-        }
-        if(ventaDelivery == "si"){
-            vtp.deseadelivery();
-        }
-        vtp.porcantidad()
-    }
     console.table(ventaProducto);
 
+    
     let padre = document.getElementById("contenido");
     for(const vpt of ventaTemporal){
         let tr = document.createElement("tr");
         tr.innerHTML = `<th scope="row">${vpt.nombre}</th><td>${vpt.tipo}</td><td>${vpt.peso}</td><td>${vpt.cantidad}</td><td>${vpt.precio}</td><td>${vpt.descuento}</td><td>${vpt.adicional}</td><td>${vpt.delivery}</td>`;
         padre.appendChild(tr);
     }
+
+    //eliminando array temporal para luego llenarlo nuevamente
     let indeli = ventaTemporal.length;
     ventaTemporal.splice(0,indeli)
+
+    //eliminando el atributo disabled al botón calcular del dom
+    let botcal = document.getElementById("btncalcular");
+    botcal.removeAttribute("disabled");
 }
 
 function ingresa(){
     
     for(const vp of ventaProducto){
-        //if(ventaAdicional == "si"){
-        //    vp.deseadicional();
-        //}
+        
+        vp.porcantidad()
         switch(vp.descuento){
             case "febrero": vp.descuentoFebrero(); 
             break;
@@ -152,21 +204,31 @@ function ingresa(){
             default: ;
             break;
         }
-        if(vp.delivery = true){
+        if(vp.delivery != false){
             vp.deseadeliveryoper();
         }
     }
-        //haciendo el total del presupuesto con map() y reduce()
-        //const total = ventaProducto.map((el) => el.precio).reduce((acumulador, elemento) => acumulador + elemento, 0);
-        const total = ventaProducto.reduce((acumulador,el)=> acumulador + el.precio,0);
-        alert("El precio total del presupuesto es "+total);
-        console.table(ventaProducto);
-        ///llenando tabla en dom
-    let padre = document.getElementById("contenido");
+    ///eliminar elemento en dom para mostrar solo precio total
+    let elimalert = document.getElementById("alertelim");
+    elimalert.remove();
+    
+    //total de presupuesto con reduce
+    const total = ventaProducto.reduce((acumulador,el)=> acumulador + el.precio,0);
+    ///crear elemento en dom para mostrar precio total
+    let padrealer = document.getElementById("padrealert");
+    let divaler = document.createElement("div");
+    divaler.innerHTML = `<div class="alert alert-info" role="alert">El precio total del presupuesto es <strong>S/.${total}</strong>, el precio incluye el delivery</div>`;
+    padrealer.appendChild(divaler);
 
+    
+    //alert("El precio total del presupuesto es "+total);
+    console.table(ventaProducto);
+        
+    ///llenando tabla en dom
+    let padre = document.getElementById("contenido");
     for(const vpt of ventaProducto){
         let tr = document.createElement("tr");
-        tr.innerHTML = `<th scope="row" class="table-warning">SubTotal&nbsp;${vpt.nombre}</th><td class="table-warning">${vpt.tipo}</td><td class="table-warning">${vpt.peso}</td><td class="table-warning">${vpt.cantidad}</td><td class="table-warning">${vpt.precio}</td><td class="table-warning">${vpt.descuento}</td><td class="table-warning">${vpt.adicional}</td><td class="table-warning">${vpt.delivery}</td>`;
+        tr.innerHTML = `<th scope="row" class="table-secondary">SubTotal&nbsp;${vpt.nombre}</th><td class="table-secondary">${vpt.tipo}</td><td class="table-secondary">${vpt.peso}</td><td class="table-secondary">${vpt.cantidad}</td><td class="table-secondary">${vpt.precio}</td><td class="table-secondary">${vpt.descuento}</td><td class="table-secondary">${vpt.adicional}</td><td class="table-secondary">${vpt.delivery}</td>`;
         padre.appendChild(tr);
     }    
 }

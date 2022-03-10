@@ -49,7 +49,7 @@ conte.innerHTML = "<h2>Este H2 esta dentro de un DIV y se le agregan clases medi
 conte.className = "container row";
 
 
-//añador un elmento al body con append y createElement
+//añadir un elmento al body con append y createElement
 
 let parrafito = document.createElement("p");
 parrafito.innerHTML = "<h2>Hola Payasoooo!</h2>";
