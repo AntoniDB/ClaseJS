@@ -1,3 +1,4 @@
+
 let ventaNombre;
 let ventaTipo;
 let ventaPeso;
@@ -15,12 +16,7 @@ const cantic = [{id:1,name:"Unidades x 15"},{id:2,name:"Unidades x 30"},{id:3,na
 
 let tiposelect = document.getElementById("tipoc");
 let cantidadselect = document.getElementById("cantidadc");
-//función borrar options de select 
-tiposelect.onchange = () => {
-    for (let i = cantidadselect.options.length; i >= 0; i--) {
-      cantidadselect.remove(i);
-    }
-  };
+
 ///select dependiente de otro select
 tiposelect.onclick = () => {        
     let valuetipo = parseInt(tiposelect.value);
@@ -119,9 +115,35 @@ const datosProducto = [
     {producto:"cupcake",precio:50,estado:false},
     {producto:"torta fondant", precio:170,estado:false},
 ];
+
 const ventaProducto = [];
 const ventaTemporal = [];
 //////Arrays
+
+
+////local storage
+let almacenado = [];
+let almacenador = JSON.parse(localStorage.getItem("calculado"));
+if(almacenador){
+    almacenado = almacenador;
+    let padrealer = document.getElementById("padrealert");
+let divalerls = document.createElement("div");
+divalerls.innerHTML = `<div id="alertlost"><div class="alert alert-info" role="alert">Quedaron elementos sin calcular:</div>`;
+padrealer.appendChild(divalerls);
+let botcal = document.getElementById("btncalcular");
+    botcal.removeAttribute("disabled");
+almacenado.map((item) => { ventaProducto.push(item);
+    return item;});
+console.table(ventaProducto);
+    let padrels = document.getElementById("contenido");
+        for(const vpt of ventaProducto){
+            let tr = document.createElement("tr");
+            tr.innerHTML = `<th scope="row">${vpt.nombre}</th><td>${vpt.tipo}</td><td>${vpt.peso}</td><td>${vpt.cantidad}</td><td>${vpt.precio}</td><td>${vpt.descuento}</td><td>${vpt.adicional}</td><td>${vpt.delivery}</td>`;
+            padrels.appendChild(tr);
+        }
+
+}
+
 
 //busqueda 
 function buscar(){
@@ -168,8 +190,7 @@ function llena(){
     }
     console.table(ventaTemporal);
     ///llenar array ventaProducto con item de arrayTemporal
-    ventaTemporal.map((item) => {
-    ventaProducto.push(item);
+    ventaTemporal.map((item) => { ventaProducto.push(item);
     return item;
     });
     
@@ -182,7 +203,8 @@ function llena(){
         tr.innerHTML = `<th scope="row">${vpt.nombre}</th><td>${vpt.tipo}</td><td>${vpt.peso}</td><td>${vpt.cantidad}</td><td>${vpt.precio}</td><td>${vpt.descuento}</td><td>${vpt.adicional}</td><td>${vpt.delivery}</td>`;
         padre.appendChild(tr);
     }
-
+    //almacenando localstorage con array temporal
+    localStorage.setItem("calculado",JSON.stringify(ventaTemporal));
     //eliminando array temporal para luego llenarlo nuevamente
     let indeli = ventaTemporal.length;
     ventaTemporal.splice(0,indeli)
@@ -193,9 +215,7 @@ function llena(){
 }
 
 function ingresa(){
-    
     for(const vp of ventaProducto){
-        
         vp.porcantidad()
         switch(vp.descuento){
             case "febrero": vp.descuentoFebrero(); 
@@ -214,7 +234,7 @@ function ingresa(){
     ///eliminar elemento en dom para mostrar solo precio total
     let elimalert = document.getElementById("alertelim");
     elimalert.remove();
-    
+        
     //total de presupuesto con reduce
     const total = ventaProducto.reduce((acumulador,el)=> acumulador + el.precio,0);
     ///crear elemento en dom para mostrar precio total
@@ -234,34 +254,15 @@ function ingresa(){
         tr.innerHTML = `<th scope="row" class="table-secondary">SubTotal&nbsp;${vpt.nombre}</th><td class="table-secondary">${vpt.tipo}</td><td class="table-secondary">${vpt.peso}</td><td class="table-secondary">${vpt.cantidad}</td><td class="table-secondary">${vpt.precio}</td><td class="table-secondary">${vpt.descuento}</td><td class="table-secondary">${vpt.adicional}</td><td class="table-secondary">${vpt.delivery}</td>`;
         padre.appendChild(tr);
     }    
+    //borrar local storage luego de calcular
+    localStorage.clear();
 }
+
 //llena();
 let btncalcula = document.getElementById("btncalcular");
-btncalcula.addEventListener("click", ingresa);    
+btncalcula.addEventListener("click", ingresa);
 let btnllena = document.getElementById("btnagregar");
 btnllena.addEventListener("click", llena);
-let btnborr = document.getElementById("btnborra");
-btnborr.addEventListener('click', () => {
-   
-    Swal.fire({
-        title: 'Desea elminar el item agregado',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Sipi',
-        cancelButtonText: 'No'
-    }).then((result) => {
-
-        if (result.isConfirmed) {
-            Swal.fire({
-                title: 'Eliminado',
-                icon: 'success',
-                text: 'El item ha sido eliminado puede agregar otro'
-            })
-        }
-    })
-})
-
-
 //console.log(ventaNombre);
 //ingresa();
 //llenap();
