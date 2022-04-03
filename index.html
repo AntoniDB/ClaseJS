@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     
     
-    <title>Document</title>
+    <title>Simulador de presupuesto MDLP</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #54638a;">
@@ -27,21 +27,23 @@
           </div>
         </div>
       </nav>
-    <div class="container-fluid">
-        <div class="container mt-3">
-            <h2>Pastelería MDL<small class="text-muted">&nbsp;Simulador de Precios</small></h2>
+    <div class="container">
+        <div class="row gap-0 mt-3 ">
+            <div class="col-sm-12 col-md-6 col-lg-6"><h2>Pastelería MDL<small class="text-muted">&nbsp;Simulador de Precios</small></h2></div>
+            <div class="col-sm-12 col-md-6 col-lg-6" id="tiempo">           
+            </div>
         </div>    
         <div class="container mt-3">
             <div class="container rounded-2 border border-light shadow p-2" id="padrealert">
                 <div class="alert alert-danger" role="alert" id="alertelim">
-                    Selecciona las opciones para generar el presupuesto
+                    LLenar el formulario para generar el presupuesto
                   </div>
             </div>
             <form>
             <div class="row gap-0 mt-3">
                 
                 <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
-                    <input class="form-control" id="nombrec" type="text" placeholder="Nombre cotizacion" aria-label="default input example" value="" required>
+                    <input type="text" class="form-control" id="nombrec" placeholder="Nombre cotizacion" value="" required>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
                     <select class="form-select" aria-label="Default select example" id="tipoc">
@@ -100,13 +102,37 @@
                 </div>
                 <div class="col-12 mt-2">
                     <input type="button" class="btn btn-warning" value="Nuevo" id="btnnuevo" onclick="location.reload()">
-                    <input type="button" class="btn btn-dark" value="Calcular" id="btncalcular" disabled>
+                    <input type="button" class="btn btn-primary" value="Calcular" id="btncalcular" disabled>
                     <input type="button" class="btn btn-success" value="Agregar" id="btnagregar">
                     <input type="button" class="btn btn-danger" value="Eliminar" id="btnborra" disabled>
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Lista de Productos</button>
+
+
                 </div>
             </div>
             </form>
-            
+             <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Lista de Productos</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <ol class="list-group list-group-numbered" id="productos">
+
+            </ol>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
         </div>
         <div class="container mt-3">
             <div class="container table-responsive">
@@ -135,6 +161,7 @@
     <script language="JavaScript" type="text/javascript" src="script57.js"></script>
     <script src="sweetalert2.all.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
     
 
 </body>

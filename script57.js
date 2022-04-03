@@ -1,3 +1,36 @@
+///api
+let tiempo = document.getElementById("tiempo");
+
+fetch('https://goweather.herokuapp.com/weather/trujillo')
+.then((resp) => resp.json())
+.then((da)=>{
+    const p = document.createElement("p");
+    p.innerHTML = `<u>Trujillo</u>&nbsp;<strong>${da.temperature}</strong>&nbsp;<em>Cielo:&nbsp;${da.description}</em>&nbsp;<em>Viento:&nbsp;${da.wind}</em>`;
+    tiempo.appendChild(p);
+    
+})
+///api
+//datos de producto json
+const pr = document.getElementById("productos");
+fetch('./producto.json')
+.then((respp)=>respp.json())
+.then((dap)=>{
+    dap.forEach((pro)=>{
+        const dv = document.createElement('div')
+        dv.innerHTML = `<li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">${pro.producto}</div>
+          Tiempo estimado de preparación&nbsp;${pro.estimado}
+        </div>
+        <span class="badge bg-primary rounded-pill">Precio = S/.${pro.precio}</span>
+      </li>`;
+        pr.appendChild(dv);
+    })
+})
+
+//datos de producto json
+
+
 let ventaNombre;
 let ventaTipo;
 let ventaPeso;
@@ -127,9 +160,9 @@ if(almacenador){
     let padrealer = document.getElementById("padrealert");
     let divalerls = document.createElement("div");
 
-    for(const alma of almacenado){
-        divalerls.innerHTML = `<div id="alertlost"><div class="alert alert-info" role="alert">Quedaron elementos sin calcular. Puedes verlos aquí&nbsp;&nbsp;<button type="button" class="btn btn-outline-info btn-sm" id="lsbtn">Info</button></div>`;
-    }
+    //for(const alma of almacenado){
+        divalerls.innerHTML = `<div id="alertlost"><div class="alert alert-info" role="alert">Quedaron elementos sin calcular. Puedes verlos aquí&nbsp;&nbsp;<button type="button" class="btn btn-outline-info btn-sm" id="lsbtn">Info</button>&nbsp;&nbsp;<button type="button" class="btn btn-outline-danger btn-sm" id="bribtn">Borrar Info</button></div>&nbsp;`;
+    //}
     padrealer.appendChild(divalerls);
     let btnlsv = document.getElementById("lsbtn");
     btnlsv.addEventListener('click',()=>{
@@ -142,6 +175,12 @@ if(almacenador){
         confirmButtonText: 'De acuerdo'
     })}
 
+    })
+
+    let bribtn = document.getElementById("bribtn");
+    bribtn.addEventListener("click", () =>{
+        location.reload();
+        localStorage.clear();
     })
 }
 
@@ -185,9 +224,19 @@ function llena(){
     ventaDelivery = document.getElementById("deliveryc").value;
     
     //ventaNombre == "" && alert("Debe rellenar los campos")&& location.reload();
-    if(ventaNombre == ""){
-        alert("Deber rellenar los campos");
-        location.reload();
+    if((ventaNombre === "")||(ventaPrecio === "")){
+        //alert("Deber rellenar todos los campos");
+        Toastify({
+            text: "Deber rellenar todos los campos",
+            duration: 4000,
+            gravity: 'top',
+            position: 'center',
+            style: {
+                background: "linear-gradient(to right, #E63946, #E63946)", color: "#F1FAEE", fontWeight: "bold"
+              },
+        }).showToast();
+        //location.reload();
+        return false;
     }
     ventaTemporal.push(new Venta(ventaNombre,ventaTipo,ventaPeso,ventaCantidad,ventaPrecio,ventaDescuento));
     for(const vta of ventaTemporal){
@@ -285,6 +334,12 @@ function ingresa(){
     //borrar local storage luego de calcular
     localStorage.clear();
 
+    let botcal = document.getElementById("btncalcular");
+    botcal.setAttribute("disabled", "disabled");
+    let btnagregar = document.getElementById("btnagregar");
+    btnagregar.setAttribute("disabled", "disabled");
+    let btnborra = document.getElementById("btnborra");
+    btnborra.setAttribute("disabled", "disabled");
     
     
 }

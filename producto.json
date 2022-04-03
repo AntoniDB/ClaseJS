@@ -1,0 +1,10 @@
+[
+    {"producto":"torta de chocolate","precio":140,"estimado":"1 Día"},
+    {"producto":"torta helada","precio":110,"estimado":"2 Días"},
+    {"producto":"torta 3 leches","precio":100,"estimado":"5 Días"},
+    {"producto":"cupcake","precio":50,"estimado":"1 Día"},
+    {"producto":"torta fondant", "precio":170,"estimado":"7 días"},
+    {"producto":"Mazamorra","precio":150,"estimado":"1 Día"},
+    {"producto":"Arroz con leche","precio":13,"estimado":"2 Días"},
+    {"producto":"Gelatina","precio":10,"estimado":"1 Día"}
+]
